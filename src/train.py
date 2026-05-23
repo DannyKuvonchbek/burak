@@ -8,4 +8,4 @@ def reverse_sentence(text):
     return " ".join(result)
 
 
-print(reverse_sentence("we like coding!"))  # ew ekil !gnidoc
+print(reverse_sentence("we like coding!"))
