@@ -1,12 +1,8 @@
 import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 
-// REACT
-
-const memberController: T = {};
-
-/*
-memberController.goHome = (req: Request, res: Response) => {
+const restaurantController: T = {};
+restaurantController.goHome = (req: Request, res: Response) => {
     try {
       res.send("Home Page");
     } catch (err) {
@@ -14,7 +10,7 @@ memberController.goHome = (req: Request, res: Response) => {
     }
   };   
 
-memberController.getLogin = (req: Request, res: Response) => {
+restaurantController.getLogin = (req: Request, res: Response) => {
     try {
       res.send("Login Page");
     } catch (err) {
@@ -23,12 +19,12 @@ memberController.getLogin = (req: Request, res: Response) => {
   }; 
 
 
-memberController.getSignup = (req: Request, res: Response) => {
+restaurantController.getSignup = (req: Request, res: Response) => {
     try {
       res.send("Signup Page");
     } catch (err) {
       console.log("Error, getSignup: ", err);
     }
   }; 
-*/
-  export default memberController;
+
+  export default restaurantController;
