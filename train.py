@@ -1,4 +1,17 @@
+# N-TASK
+def palindrom_check(str):
+    reversed_text = str[::-1]
+
+    if str == reversed_text:
+        return True
+    else:
+        return False
+
+
+print(palindrom_check("dad"))
+
 # M-TASK
+'''
 def getSquareNumbers(data):
     array = []
     for i in data:
@@ -8,6 +21,7 @@ def getSquareNumbers(data):
 
 
 print(getSquareNumbers([1, 2, 3]))
+'''
 
 # L-TASK
 '''def reverse_sentence(text):
