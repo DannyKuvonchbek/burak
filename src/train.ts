@@ -1,12 +1,4 @@
-/* Project Standards:
-  - Logging standards
-  - Naming standards:
-      function , method, variable => CAMEL   goHome
-      class =>  PASCAL                       MemberService
-      folder => KEBAB
-      css => SNAKE                           button_style
-  - Error handling
-*/ 
+ 
 // O-TASK
 function calculateSumOfNumbers(arr: any[]): number {
   let total = 0;
@@ -35,3 +27,24 @@ function objectToArray(obj: any): any[] {
 
 console.log(objectToArray({ a: 10, b: 20 }));
 
+
+/* Project Standards:
+  - Logging standards
+  - Naming standards:
+      function , method, variable => CAMEL   goHome
+      class =>  PASCAL                       MemberService
+      folder => KEBAB
+      css => SNAKE                           button_style
+  - Error handling
+*/
+
+/* Traditional Api 
+   Rest Api
+   GraphQl Api
+   .....
+*/ 
+
+
+/* Traditional FD  =>  BSSR  =>  EJS 
+   Modern FD       =>   SPA  =>  REACT
+*/ 
