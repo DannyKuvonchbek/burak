@@ -1,3 +1,11 @@
+# Q-TASK
+def hasProperty(obj, text):
+    return text in obj
+
+
+print(hasProperty({"name": "BMW"}, "name"))
+
+'''
 # P-TASK
 def objectToArray(obj):
     result = []
@@ -9,7 +17,9 @@ def objectToArray(obj):
 
 
 print(objectToArray({"a": 10, "b": 20}))
+'''
 
+'''
 # O-TASK
 
 
@@ -22,9 +32,8 @@ def calculateSumOfNumbers(arr):
 
     return total
 
-
 print(calculateSumOfNumbers([10, "10", {"son": 10}, True, 35]))
-
+'''
 
 '''
 # N-TASK
