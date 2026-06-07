@@ -3,6 +3,10 @@ dotenv.config();
 import mongoose from "mongoose";
 import app from "./app";
 
+//mongoosening maqsadi nima 
+// tsp qilib beradi yani 
+// database server bilan  backendserverni  doimiy ulab beradi 
+
 mongoose
     .connect(process.env.MONGO_URL as string, {})
     .then((data) => {

@@ -1,9 +1,18 @@
+# R-TASK
+def calculate(data):
+    return eval(data)
+
+
+print(calculate("1 + 3"))
+
+'''
 # Q-TASK
 def hasProperty(obj, text):
     return text in obj
 
 
 print(hasProperty({"name": "BMW"}, "name"))
+'''
 
 '''
 # P-TASK
