@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 import path from "path";
 import router from "./router";
 import routerAdmin from "./router-admin";

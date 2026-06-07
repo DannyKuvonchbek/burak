@@ -1,19 +1,18 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const routerAdmin = express_1.default.Router();
-const restaurant_controller_1 = __importDefault(require("./controllers/restaurant.controller"));
+import express from "express";
+const routerAdmin = express.Router();
+import restaurantController from "./controllers/restaurant.controller";
+
 /** Restaurant */
-routerAdmin.get("/", restaurant_controller_1.default.goHome);
+routerAdmin.get("/", restaurantController.goHome);
 routerAdmin
-    .get("/login", restaurant_controller_1.default.getLogin)
-    .post("/login", restaurant_controller_1.default.processLogin);
+    .get("/login", restaurantController.getLogin)
+    .post("/login", restaurantController.processLogin);
 routerAdmin
-    .get("/signup", restaurant_controller_1.default.getSignup)
-    .post("/signup", restaurant_controller_1.default.processSignup);
+    .get("/signup", restaurantController.getSignup)
+    .post("/signup", restaurantController.processSignup);
+
+routerAdmin.get("/check-me", restaurantController.checkAuthSession);
+
 /** Product */
 /** User */
-exports.default = routerAdmin;
+export default routerAdmin;
