@@ -1,9 +1,24 @@
+# S-TASK
+def missingNumber(nums):
+    n = len(nums)
+    total = n * (n + 1) // 2
+    sum_nums = 0
+
+    for num in nums:
+        sum_nums += num
+
+    return total - sum_nums
+
+
+print(missingNumber([3, 0, 1]))
+'''
 # R-TASK
 def calculate(data):
     return eval(data)
 
 
 print(calculate("1 + 3"))
+'''
 
 '''
 # Q-TASK
