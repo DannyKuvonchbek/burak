@@ -38,18 +38,26 @@ console.log(objectToArray({ a: 10, b: 20 }));
   - Error handling
 */
 
-/* Traditional Api 
-   Rest Api
-   GraphQl Api
+/* Request: 
+  Traditional Api 
+  Rest Api
+  GraphQl Api
    .....
 */ 
 
 
-/* Traditional FD  =>  BSSR  =>  EJS 
-   Modern FD       =>   SPA  =>  REACT
+/* Frontend Development
+  Traditional FD  =>  BSSR  =>  EJS 
+  Modern FD       =>   SPA  =>  REACT
 */ 
 
-/*
+/*Cookies
   request join
   self destroy
+ */
+
+/* Validation
+   Frontend validation
+   Backend validation
+  Database validation
  */
