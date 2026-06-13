@@ -1,4 +1,13 @@
-# S-TASK
+# T-TASK
+def mergeSortedArrays(data, num):
+    for a in data:
+        num.append(a)
+    return sorted(num)
+
+
+print(mergeSortedArrays([0, 3, 4], [4, 6]))
+
+'''# S-TASK
 def missingNumber(nums):
     n = len(nums)
     total = n * (n + 1) // 2
@@ -9,8 +18,9 @@ def missingNumber(nums):
 
     return total - sum_nums
 
-
 print(missingNumber([3, 0, 1]))
+'''
+
 '''
 # R-TASK
 def calculate(data):
