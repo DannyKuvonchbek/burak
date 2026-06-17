@@ -1,1 +1,1 @@
-console.log("Hello, MIT!");
+console.log("Basic frontend javascript file");
