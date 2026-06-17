@@ -5,6 +5,7 @@ import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 import { Message } from "../libs/types/Errors";
+import { resourceLimits } from "node:worker_threads";
 
 const memberService = new MemberService();
 
@@ -34,7 +35,6 @@ restaurantController.getSignup = (req: Request, res: Response) => {
 
 restaurantController.getLogin = (req: Request, res: Response) => {
     try {
-      console.log("getLogin");
       res.render("login");
     } catch (err) {
       console.log("Error, getLogin: ", err);
@@ -97,6 +97,27 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
     }
   };
 
+  restaurantController.getUsers = async (req: Request, res: Response) => {
+    try {
+      console.log("getUsers");
+      const result = await memberService.getUsers();
+      console.log("result:", result);
+
+      res.render("users", { users: result});
+    } catch (err) {
+      console.log("Error, getUsers:", err);
+      res.redirect("/admin/login");
+    }
+  }; 
+
+  restaurantController.updateChosenUser = (req: Request, res: Response) => {
+    try {
+      console.log("updateChosenUser");
+    } catch (err) {
+      console.log("Error, updateChosenUser:", err);
+    }
+  }; 
+
 
 restaurantController.checkAuthSession = async (req: AdminRequest, res: Response) => {
     try {
@@ -127,6 +148,7 @@ restaurantController.verifyRestaurant = (
     }
   };
  
+
 
 
 export default restaurantController;
