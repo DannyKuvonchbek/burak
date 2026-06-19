@@ -1,4 +1,19 @@
-# T-TASK
+# V-TASK
+def countChars(data):
+    result = {}
+
+    for a in data:
+        if a in result:
+            result[a] += 1
+        else:
+            result[a] = 1
+
+    return result
+
+
+print(countChars("hello"))
+
+'''# T-TASK
 def mergeSortedArrays(data, num):
     for a in data:
         num.append(a)
@@ -6,6 +21,7 @@ def mergeSortedArrays(data, num):
 
 
 print(mergeSortedArrays([0, 3, 4], [4, 6]))
+'''
 
 '''# S-TASK
 def missingNumber(nums):
