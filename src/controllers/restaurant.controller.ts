@@ -46,6 +46,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 restaurantController.processSignup = async (req: AdminRequest, res: Response) => {
     try {
       console.log("processSignup");
+      console.log("req.body:", req.body);
       const file = req.file;
       if (!file)
         throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
@@ -100,7 +101,7 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
   restaurantController.getUsers = async (req: Request, res: Response) => {
     try {
       console.log("getUsers");
-      const result = await memberService.getUsers();
+      const result = await memberService.getUsers(); //call
       console.log("result:", result);
 
       res.render("users", { users: result});
@@ -115,7 +116,7 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
       console.log("updateChosenUser");
       const result = await memberService.updateChosenUser(req.body);
 
-      res.status(HttpCode.OK).json({ data: result});
+      res.status(HttpCode.OK).json({ data: result}); 
     } catch (err) {
       console.log("Error, updateChosenUser:", err);
       if (err instanceof Errors) res.status(err.code).json(err);
