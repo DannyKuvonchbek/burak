@@ -7,13 +7,17 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
+//mongoosening maqsadi nima 
+// tsp qilib beradi yani 
+// database server bilan  backendserverni  doimiy ulab beradi 
 mongoose_1.default
     .connect(process.env.MONGO_URL, {})
     .then((data) => {
     console.log("MongoDB connection succeed");
     const PORT = process.env.PORT ?? 3003;
     app_1.default.listen(PORT, () => {
-        console.log(`The server is running successfully on port ${PORT}`);
+        console.info(`The server is running successfully on port ${PORT}`);
+        console.info(`Admin project on http://localhost:${PORT}/admin \n`);
     });
 })
     .catch((err) => console.log("ERROR on connection MongoDB", err));

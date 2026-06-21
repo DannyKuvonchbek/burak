@@ -1,4 +1,24 @@
 "use strict";
+// O-TASK
+function calculateSumOfNumbers(arr) {
+    let total = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === "number") {
+            total += arr[i];
+        }
+    }
+    return total;
+}
+console.log(calculateSumOfNumbers([10, "10", { son: 10 }, true, 35]));
+// P-TASK
+function objectToArray(obj) {
+    let result = [];
+    for (let key in obj) {
+        result.push([key, obj[key]]);
+    }
+    return result;
+}
+console.log(objectToArray({ a: 10, b: 20 }));
 /* Project Standards:
   - Logging standards
   - Naming standards:
@@ -7,4 +27,23 @@
       folder => KEBAB
       css => SNAKE                           button_style
   - Error handling
-*/ 
+*/
+/* Request:
+  Traditional Api
+  Rest Api
+  GraphQl Api
+   .....
+*/
+/* Frontend Development
+  Traditional FD  =>  BSSR  =>  EJS
+  Modern FD       =>   SPA  =>  REACT
+*/
+/*Cookies
+  request join
+  self destroy
+ */
+/* Validation
+   Frontend validation
+   Backend validation
+  Database validation
+ */ 

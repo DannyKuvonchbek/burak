@@ -1,31 +1,41 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const Member_service_1 = __importDefault(require("../models/Member.service"));
+const Errors_1 = __importDefault(require("../libs/types/Errors"));
+const memberService = new Member_service_1.default();
 // REACT
 const memberController = {};
-/*
-memberController.goHome = (req: Request, res: Response) => {
+memberController.signup = async (req, res) => {
     try {
-      res.send("Home Page");
-    } catch (err) {
-      console.log("Error, goHome: ", err);
+        console.log("signup");
+        const input = req.body, result = await memberService.signup(input);
+        // TODO: TOKENS AUTHENTICATION
+        res.json({ member: result });
     }
-  };
-
-memberController.getLogin = (req: Request, res: Response) => {
+    catch (err) {
+        console.log("Error, signup:", err);
+        if (err instanceof Errors_1.default)
+            res.status(err.code).json(err);
+        else
+            res.status(Errors_1.default.standart.code).json(Errors_1.default.standart);
+    }
+};
+memberController.login = async (req, res) => {
     try {
-      res.send("Login Page");
-    } catch (err) {
-      console.log("Error, getLogin: ", err);
+        console.log("login");
+        const input = req.body, result = await memberService.login(input);
+        // TODO: TOKENS AUTHENTICATION
+        res.json({ member: result });
     }
-  };
-
-
-memberController.getSignup = (req: Request, res: Response) => {
-    try {
-      res.send("Signup Page");
-    } catch (err) {
-      console.log("Error, getSignup: ", err);
+    catch (err) {
+        console.log("Error, login: ", err);
+        if (err instanceof Errors_1.default)
+            res.status(err.code).json(err);
+        else
+            res.status(Errors_1.default.standart.code).json(Errors_1.default.standart);
     }
-  };
-*/
+};
 exports.default = memberController;
