@@ -1,3 +1,13 @@
+# W-TASK
+def chunkArray(arr, n):
+    result = []
+    for i in range(0, len(arr), n):
+        result.append(arr[i:i+n])
+    return result
+
+print(chunkArray([1, 2, 3, 4, 5], 2))
+
+'''
 # V-TASK
 def countChars(data):
     result = {}
@@ -12,6 +22,7 @@ def countChars(data):
 
 
 print(countChars("hello"))
+'''
 
 '''# T-TASK
 def mergeSortedArrays(data, num):
