@@ -1,4 +1,4 @@
 {
-  "editor.defaultFormatter": "TypeScriptTeam.native-preview",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "workbench.colorTheme": "Monokai Pro (Filter Spectrum)"
 }
