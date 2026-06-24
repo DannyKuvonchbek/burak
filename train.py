@@ -1,3 +1,20 @@
+# X-TASK
+def countOccurrences(obj, data):
+    count = 0
+
+    for key, value in obj.items():
+        if key == data:
+            count += 1
+
+        if isinstance(value, dict):
+            count += countOccurrences(value, data)
+
+    return count
+
+
+print(countOccurrences({"model": "A", "s": {"model": "B"}}, "model"))
+
+'''
 # W-TASK
 def chunkArray(arr, n):
     result = []
@@ -6,6 +23,7 @@ def chunkArray(arr, n):
     return result
 
 print(chunkArray([1, 2, 3, 4, 5], 2))
+'''
 
 '''
 # V-TASK
