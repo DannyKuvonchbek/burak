@@ -39,5 +39,6 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
-  }
+  },
+  "packageManager": "yarn@1.22.18+sha512.a057dfbfa269dbe05350122dcf1d59d1da629135feada45daaea5fab378c2a7a21ed60fa46e3c0c5ca8390c532f6f69f264ac1d18695ef4f339e9b8c84404a19"
 }

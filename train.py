@@ -1,3 +1,13 @@
+# task Y
+def findIntersection(arr1, arr2):
+    result = []
+    for n in arr1:
+        if n in arr2: result.append(n)
+    print(result)
+
+findIntersection([1, 2, 3], [3, 2, 0])
+
+'''
 # X-TASK
 def countOccurrences(obj, data):
     count = 0
@@ -13,6 +23,7 @@ def countOccurrences(obj, data):
 
 
 print(countOccurrences({"model": "A", "s": {"model": "B"}}, "model"))
+'''
 
 '''
 # W-TASK
