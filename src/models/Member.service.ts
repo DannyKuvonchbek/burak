@@ -3,7 +3,7 @@ import {
   LoginInput,
   Member,
   MemberInput,
-  MemberupdateInput,
+  MemberUpdateInput,
 } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/types/Errors";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
@@ -70,6 +70,19 @@ class MemberService {
     return result;
   }
 
+  public async updateMember(
+    member: Member,
+    input: MemberUpdateInput,
+  ): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const result = await this.memberModel
+      .findOneAndUpdate({ _id: memberId }, input, { new: true })
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+
+    return result;
+  }
+
   /** BSSR */
 
   public async processSignup(input: MemberInput): Promise<Member> {
@@ -121,7 +134,7 @@ class MemberService {
     return result;
   }
 
-  public async updateChosenUser(input: MemberupdateInput): Promise<Member> {
+  public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
     input._id = shapeIntoMongooseObjectId(input._id);
     const result = await this.memberModel
       .findByIdAndUpdate(

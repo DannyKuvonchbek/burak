@@ -49,7 +49,7 @@ export interface AdminRequest extends Request {
   files: Express.Multer.File[];
 }
 
-export interface MemberupdateInput {
+export interface MemberUpdateInput {
   _id: ObjectId;
   memberStatus?: MemberStatus;
   memberNick?: string;
