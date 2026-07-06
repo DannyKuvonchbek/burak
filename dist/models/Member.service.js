@@ -46,6 +46,16 @@ class MemberService {
         this.memberModel = Member_model_1.default;
     }
     /* SPA */
+    async getRestaurant() {
+        const result = await this.memberModel
+            .findOne({ memberType: member_enum_1.MemberType.RESTAURANT })
+            //.lean() yangi nimidr dataset qushmoqchi bo'lsak ishlatamiz leaning vazifasi shu
+            .exec();
+        //result.target = "test";
+        if (!result)
+            throw new Errors_1.default(Errors_1.HttpCode.NOT_FOUND, Errors_1.Message.NO_DATA_FOUND);
+        return result;
+    }
     async signup(input) {
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
@@ -59,18 +69,51 @@ class MemberService {
         }
     }
     async login(input) {
-        //TODO: Consider member status later 
         const member = await this.memberModel
-            .findOne({ memberNick: input.memberNick }, { memberNick: 1, memberPassword: 1 })
+            .findOne({
+            memberNick: input.memberNick,
+            memberStatus: { $ne: member_enum_1.MemberStatus.DELETE },
+        }, { memberNick: 1, memberPassword: 1, memberStatus: 1 })
             .exec();
         if (!member)
             throw new Errors_1.default(Errors_1.HttpCode.NOT_FOUND, Errors_1.Message.NO_MEMBER_NICK);
+        else if (member.memberStatus === member_enum_1.MemberStatus.BLOCK) {
+            throw new Errors_1.default(Errors_1.HttpCode.FORBIDDEN, Errors_1.Message.BLOCKED_USER);
+        }
         //const isMatch = input.memberPassword === member.memberPassword;
         const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
         if (!isMatch) {
             throw new Errors_1.default(Errors_1.HttpCode.UNAUTHORIZED, Errors_1.Message.WRONG_PASSWORD);
         }
         return await this.memberModel.findById(member._id).lean().exec();
+    }
+    async getMemberDetail(member) {
+        const memberId = (0, config_1.shapeIntoMongooseObjectId)(member._id);
+        const result = await this.memberModel
+            .findOne({ _id: memberId, memberStatus: member_enum_1.MemberStatus.ACTIVE })
+            .exec();
+        if (!result)
+            throw new Errors_1.default(Errors_1.HttpCode.NOT_FOUND, Errors_1.Message.NO_DATA_FOUND);
+        return result;
+    }
+    async updateMember(member, input) {
+        const memberId = (0, config_1.shapeIntoMongooseObjectId)(member._id);
+        const result = await this.memberModel
+            .findOneAndUpdate({ _id: memberId }, input, { new: true })
+            .exec();
+        if (!result)
+            throw new Errors_1.default(Errors_1.HttpCode.NOT_MODIFIED, Errors_1.Message.UPDATE_FAILED);
+        return result;
+    }
+    async getTopUsers() {
+        const result = await this.memberModel
+            .find({ memberStatus: member_enum_1.MemberStatus.ACTIVE, memberPoints: { $gt: 1 } })
+            .sort({ memberPoints: -1 })
+            .limit(4)
+            .exec();
+        if (!result)
+            throw new Errors_1.default(Errors_1.HttpCode.NOT_FOUND, Errors_1.Message.NO_DATA_FOUND);
+        return result;
     }
     /** BSSR */
     async processSignup(input) {
@@ -114,14 +157,13 @@ class MemberService {
     async updateChosenUser(input) {
         input._id = (0, config_1.shapeIntoMongooseObjectId)(input._id);
         const result = await this.memberModel
-            .findByIdAndUpdate({ _id: input._id }, // filter 
+            .findByIdAndUpdate({ _id: input._id }, // filter
         input, // update
-        { new: true }) // 
+        { new: true }) //
             .exec();
         if (!result)
             throw new Errors_1.default(Errors_1.HttpCode.NOT_MODIFIED, Errors_1.Message.UPDATE_FAILED);
         return result;
     }
-    ;
 }
 exports.default = MemberService;

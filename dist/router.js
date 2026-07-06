@@ -6,6 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const member_controller_1 = __importDefault(require("./controllers/member.controller"));
-router.post("/login", member_controller_1.default.login);
-router.post("/signup", member_controller_1.default.signup);
+const uploader_1 = __importDefault(require("./libs/utils/uploader"));
+const product_controller_1 = __importDefault(require("./controllers/product.controller"));
+/** Member **/
+router.get("/member/restaurant", member_controller_1.default.getRestaurant);
+router.post("/member/login", member_controller_1.default.login);
+router.post("/member/signup", member_controller_1.default.signup);
+router.post("/member/logout", member_controller_1.default.verifyAuth, member_controller_1.default.logout);
+router.get("/member/detail", member_controller_1.default.verifyAuth, member_controller_1.default.getMemberDetail);
+router.post("/member/update", member_controller_1.default.verifyAuth, (0, uploader_1.default)("members").single("memberImage"), member_controller_1.default.updateMember);
+router.get("/member/top-users", member_controller_1.default.getTopUsers);
+/** Product **/
+router.get("/product/all", product_controller_1.default.getProducts);
+/** Order **/
 exports.default = router;

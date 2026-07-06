@@ -19,7 +19,9 @@ var Message;
     Message["CREATE_FAILED"] = "Create is failed";
     Message["UPDATE_FAILED"] = "Updata is failed";
     Message["USED_NICK_PHONE"] = "You are inserting already used nick or phone!";
+    Message["TOKEN_CREATION_FAILED"] = "Token creation error!";
     Message["NO_MEMBER_NICK"] = "No member with that member nick!";
+    Message["BLOCKED_USER"] = "You have been blocked, contact the restaurant!";
     Message["WRONG_PASSWORD"] = "Wrong password  please try again!";
     Message["NOT_AUTHENTICATED"] = "You are not authenticated, Please login first!";
 })(Message || (exports.Message = Message = {}));
@@ -32,6 +34,6 @@ class Errors extends Error {
 }
 Errors.standart = {
     code: HttpCode.INTERNAL_SERVER_ERROR,
-    message: Message.SOMETHING_WENT_WRONG
+    message: Message.SOMETHING_WENT_WRONG,
 };
 exports.default = Errors;
