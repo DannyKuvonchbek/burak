@@ -18,5 +18,6 @@ router.post("/member/update", member_controller_1.default.verifyAuth, (0, upload
 router.get("/member/top-users", member_controller_1.default.getTopUsers);
 /** Product **/
 router.get("/product/all", product_controller_1.default.getProducts);
+router.get("/product/:id", member_controller_1.default.retrieveAuth, product_controller_1.default.getProduct);
 /** Order **/
 exports.default = router;
