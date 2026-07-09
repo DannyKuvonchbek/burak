@@ -1,0 +1,27 @@
+import mongoose from "mongoose";
+import { mongo, Schema } from "mongoose";
+import { OrderStatus } from "./OrderItem.model";
+
+const orderSchema = new Schema(
+  {
+    orderTotal: {
+      type: Number,
+      required: true,
+    },
+
+    orderStatus: {
+      type: String,
+      enum: OrderStatus,
+      default: OrderStatus.PAUSE,
+    },
+
+    memberId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Member",
+    },
+  },
+  { timestamps: true },
+);
+
+export default mongoose.model("Order", orderSchema);

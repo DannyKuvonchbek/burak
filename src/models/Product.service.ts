@@ -41,13 +41,14 @@ class ProductService {
 
     const result = await this.productModel
       .aggregate([
-        { $match: match },
-        { $sort: sort },
-        { $skip: (inquiry.page * 1 - 1) * inquiry.limit },
-        { $limit: inquiry.limit * 1 },
+        { $match: match }, // stage
+        { $sort: sort }, // sort stage
+        { $skip: (inquiry.page * 1 - 1) * inquiry.limit }, //skip stage
+        { $limit: inquiry.limit * 1 }, //limit stage
       ])
       .exec();
-    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    if (!result.length)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     return result;
   }
