@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { mongo, Schema } from "mongoose";
-import { OrderStatus } from "./OrderItem.model";
+import { OrderStatus } from "../libs/enums/order.enum";
 
 const orderSchema = new Schema(
   {
