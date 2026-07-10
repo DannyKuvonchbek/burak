@@ -9,6 +9,11 @@ const orderSchema = new Schema(
       required: true,
     },
 
+    orderDelivery: {
+      type: Number,
+      required: true,
+    },
+
     orderStatus: {
       type: String,
       enum: OrderStatus,
