@@ -8,8 +8,8 @@ export interface OrderItem {
   itemPrice: number;
   orderId: ObjectId;
   productId: ObjectId;
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Order {
@@ -17,8 +17,8 @@ export interface Order {
   orderDelivery: number;
   orderStatus: OrderStatus;
   memberId: ObjectId;
-  createAt: Date;
-  updateAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
   /** from aggregatios **/
   orderItems: OrderItem[];
   productData: Product[];

@@ -107,13 +107,26 @@ class MemberService {
     }
     async getTopUsers() {
         const result = await this.memberModel
-            .find({ memberStatus: member_enum_1.MemberStatus.ACTIVE, memberPoints: { $gt: 1 } })
+            .find({
+            memberStatus: member_enum_1.MemberStatus.ACTIVE,
+            memberPoints: { $gte: 1 },
+        })
             .sort({ memberPoints: -1 })
             .limit(4)
             .exec();
-        if (!result)
+        if (!result.length)
             throw new Errors_1.default(Errors_1.HttpCode.NOT_FOUND, Errors_1.Message.NO_DATA_FOUND);
         return result;
+    }
+    async addUserPoint(member, point) {
+        const memberId = (0, config_1.shapeIntoMongooseObjectId)(member._id);
+        return await this.memberModel
+            .findOneAndUpdate({
+            _id: memberId,
+            memberType: member_enum_1.MemberType.USER,
+            memberStatus: member_enum_1.MemberStatus.ACTIVE,
+        }, { $inc: { memberPoints: point } }, { new: true })
+            .exec();
     }
     /** BSSR */
     async processSignup(input) {

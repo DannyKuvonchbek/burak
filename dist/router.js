@@ -8,6 +8,7 @@ const router = express_1.default.Router();
 const member_controller_1 = __importDefault(require("./controllers/member.controller"));
 const uploader_1 = __importDefault(require("./libs/utils/uploader"));
 const product_controller_1 = __importDefault(require("./controllers/product.controller"));
+const order_controller_1 = __importDefault(require("./controllers/order.controller"));
 /** Member **/
 router.get("/member/restaurant", member_controller_1.default.getRestaurant);
 router.post("/member/login", member_controller_1.default.login);
@@ -20,4 +21,7 @@ router.get("/member/top-users", member_controller_1.default.getTopUsers);
 router.get("/product/all", product_controller_1.default.getProducts);
 router.get("/product/:id", member_controller_1.default.retrieveAuth, product_controller_1.default.getProduct);
 /** Order **/
+router.post("/order/create", member_controller_1.default.verifyAuth, order_controller_1.default.createOrder);
+router.get("/order/all", member_controller_1.default.verifyAuth, order_controller_1.default.getMyOrders);
+router.post("/order/update", member_controller_1.default.verifyAuth, order_controller_1.default.updateOrder);
 exports.default = router;
