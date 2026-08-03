@@ -134,7 +134,12 @@ memberController.updateMember = async (req, res) => {
         if (req.file)
             input.memberImage = req.file.path.replace(/\\/, "/");
         const result = await memberService.updateMember(req.member, input);
-        res.status(Errors_1.HttpCode.OK).json(result);
+        const token = await authService.createToken(result);
+        res.cookie("accessToken", token, {
+            maxAge: config_1.AUTH_TIMER * 3600 * 1000,
+            httpOnly: false,
+        });
+        res.status(Errors_1.HttpCode.OK).json({ member: result, accessToken: token });
     }
     catch (err) {
         console.log("Error, updateMember: ", err);

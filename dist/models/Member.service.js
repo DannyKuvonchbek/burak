@@ -45,6 +45,18 @@ class MemberService {
     constructor() {
         this.memberModel = Member_model_1.default;
     }
+    normalizeMember(member) {
+        if (!member)
+            return member;
+        const normalized = member.toObject ? member.toObject() : { ...member };
+        if (normalized.memberAddress === undefined && normalized.memberAdress !== undefined) {
+            normalized.memberAddress = normalized.memberAdress;
+        }
+        if (normalized.memberAdress === undefined && normalized.memberAddress !== undefined) {
+            normalized.memberAdress = normalized.memberAddress;
+        }
+        return normalized;
+    }
     /* SPA */
     async getRestaurant() {
         const result = await this.memberModel
@@ -62,7 +74,7 @@ class MemberService {
         try {
             const result = await this.memberModel.create(input);
             result.memberPassword = "";
-            return result.toJSON();
+            return this.normalizeMember(result.toJSON());
         }
         catch (err) {
             throw new Errors_1.default(Errors_1.HttpCode.BAD_REQUEST, Errors_1.Message.USED_NICK_PHONE);
@@ -85,7 +97,8 @@ class MemberService {
         if (!isMatch) {
             throw new Errors_1.default(Errors_1.HttpCode.UNAUTHORIZED, Errors_1.Message.WRONG_PASSWORD);
         }
-        return await this.memberModel.findById(member._id).lean().exec();
+        const result = await this.memberModel.findById(member._id).lean().exec();
+        return this.normalizeMember(result);
     }
     async getMemberDetail(member) {
         const memberId = (0, config_1.shapeIntoMongooseObjectId)(member._id);
@@ -94,16 +107,23 @@ class MemberService {
             .exec();
         if (!result)
             throw new Errors_1.default(Errors_1.HttpCode.NOT_FOUND, Errors_1.Message.NO_DATA_FOUND);
-        return result;
+        return this.normalizeMember(result);
     }
     async updateMember(member, input) {
         const memberId = (0, config_1.shapeIntoMongooseObjectId)(member._id);
+        const updateData = { ...input };
+        if (updateData.memberAddress !== undefined) {
+            updateData.memberAdress = updateData.memberAddress;
+        }
+        if (updateData.memberPhone !== undefined) {
+            updateData.memberPhone = updateData.memberPhone.trim();
+        }
         const result = await this.memberModel
-            .findOneAndUpdate({ _id: memberId }, input, { new: true })
+            .findOneAndUpdate({ _id: memberId }, updateData, { new: true })
             .exec();
         if (!result)
             throw new Errors_1.default(Errors_1.HttpCode.NOT_MODIFIED, Errors_1.Message.UPDATE_FAILED);
-        return result;
+        return this.normalizeMember(result);
     }
     async getTopUsers() {
         const result = await this.memberModel

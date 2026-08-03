@@ -64,6 +64,9 @@ const memberSchema = new mongoose_1.Schema({
     memberAdress: {
         type: String,
     },
+    memberAddress: {
+        type: String,
+    },
     memberDesc: {
         type: String,
     },
